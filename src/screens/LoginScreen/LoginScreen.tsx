@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, Text, TextInput, View, StyleSheet} from 'react-native';
+import Button from '../../atom/Button/Button';
+import inputStyles from '../../atom/Inputs/style';
 import FirebaseUtil from '../../utils/FirebaseUtil';
+import loginScreenStyles from './style';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -10,49 +13,62 @@ export default function LoginScreen() {
   const [create, setCreate] = useState(false);
 
   const signIn = () => {
-    FirebaseUtil.signIn(email, password).catch((e) => {
+    FirebaseUtil.signIn(email, password).catch(e => {
       console.log(e);
       alert('Email/ password is wrong');
     });
   };
   const signUp = () => {
-    FirebaseUtil.signUp(email, password).catch((e) => {
+    FirebaseUtil.signUp(email, password).catch(e => {
       console.log(e);
       alert('Somthing went wrong');
     });
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Email"
-        onChangeText={setEmail}
-        value={email}
-        style={styles.textInput}
-      />
-      <TextInput
-        placeholder="Password"
-        onChangeText={setPassword}
-        value={password}
-        style={styles.textInput}
-        secureTextEntry={true}
-      />
-      {create ? (
-        <>
-          <Button title="Sign Up" onPress={() => signUp()} />
-          <Text style={styles.text} onPress={() => setCreate(false)}>
-            Sign In
-          </Text>
-        </>
-      ) : (
-        <>
-          <Button title="Sign in" onPress={() => signIn()} />
-          <Text style={styles.text} onPress={() => setCreate(true)}>
-            Create an Account
-          </Text>
-        </>
-      )}
-    </View>
+    <ScrollView contentContainerStyle={loginScreenStyles.container}>
+      <View style={styles.container}>
+        <Text
+          style={{
+            marginBottom: 50,
+            fontSize: 20,
+            textAlign: 'center',
+            fontWeight: '500',
+          }}>
+          WELCOME Here!!
+        </Text>
+
+        <TextInput
+          placeholder="Enter your Email"
+          onChangeText={setEmail}
+          value={email}
+          style={inputStyles.textInput}
+        />
+        <TextInput
+          placeholder="Enter your Password"
+          onChangeText={setPassword}
+          value={password}
+          style={inputStyles.textInput}
+          secureTextEntry={true}
+        />
+
+        {create ? (
+          <>
+            <Button title="Sign Up" onPress={() => signUp()} />
+            <Text style={styles.text} onPress={() => setCreate(false)}>
+              Sign In
+            </Text>
+          </>
+        ) : (
+          <>
+            <Button title="Sign In" onPress={() => signIn()} />
+            <Text style={styles.text} onPress={() => setCreate(true)}>
+              Create an Account?
+            </Text>
+          </>
+        )}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -71,7 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   text: {
-    color: 'blue',
+    color: 'grey',
     marginTop: 20,
   },
 });

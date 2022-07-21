@@ -1,11 +1,15 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useContext} from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text,} from 'react-native';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import {baseStyles} from '../../styles/theme';
 import FirebaseUtil from '../../utils/FirebaseUtil';
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import CheckoutScreen from '../../screens/CheckoutScreen';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import ProductScreen from '../../screens/ProductScreen/ProductScreen';
+import Button from '../../atom/Button/Button';
+import EmptyCart from '../../molecules/EmtyCard/EmptyCard';
 
 interface MainStackProps {}
 
@@ -18,6 +22,19 @@ const MainStack = (props: MainStackProps) => {
         <Text style={baseStyles.headerLg}>Hi There</Text>
         <Button title="SIGN OUT" onPress={FirebaseUtil.signOut} />
       </View>
+    );
+  };
+  const SettingsStack = createNativeStackNavigator();
+
+  const SettingsStackScreen = () => {
+    return (
+      <SettingsStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <SettingsStack.Screen name="HomeScreen" component={HomeScreen} />
+        <SettingsStack.Screen name="ProductScreen" component={ProductScreen} />
+      </SettingsStack.Navigator>
     );
   };
   return (
@@ -40,13 +57,14 @@ const MainStack = (props: MainStackProps) => {
           shadowRadius: 8,
           shadowOffset: {width: 0, height: 1},
           elevation: 10,
+          
         },
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={SettingsStackScreen}
         options={{
-        tabBarLabel:'Home',
+          tabBarLabel: 'Home',
           headerShown: false,
           unmountOnBlur: true,
           tabBarIcon: ({color}) => (
@@ -70,9 +88,10 @@ const MainStack = (props: MainStackProps) => {
       />
       <Tab.Screen
         name="Cart"
-        component={CheckoutScreen}
+        component={EmptyCart}
         options={{
           tabBarLabel: 'Cart',
+          headerShown: false,
           unmountOnBlur: true,
           tabBarIcon: ({color}) => (
             <AntDesign name="shoppingcart" size={26} color={color} />

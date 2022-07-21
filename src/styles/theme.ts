@@ -13,9 +13,13 @@ export const fontSize = {
   md: 18,
   lg: 24,
 };
-
+export const font = {
+  bold: 'DMSans-Bold',
+  medium: 'DMSans-Medium',
+  regular: 'DMSans-Regular',
+};
 const header = {
- 
+  fontFamily: font.bold,
   color: colors.black,
 };
 export const baseStyles = StyleSheet.create({
@@ -42,12 +46,12 @@ export const baseStyles = StyleSheet.create({
     letterSpacing: 1,
   },
   subHeader: {
-   
+    fontFamily:font.bold,
     fontSize: fontSize.sm,
     color: colors.grey,
   },
   body: {
-  
+    fontFamily:font.regular,
     fontSize: fontSize.sm,
     color: colors.black,
   },
@@ -59,9 +63,9 @@ export const baseStyles = StyleSheet.create({
   },
   containerJustify: {
     flex: 1,
-    // backgroundColor: colors.white,
-    paddingHorizontol: 30,
+    backgroundColor: '#fff',
     justifyContent: 'center',
+    padding: 20,
   },
   tabBar: {
     borderTopEndRadius: 35,
