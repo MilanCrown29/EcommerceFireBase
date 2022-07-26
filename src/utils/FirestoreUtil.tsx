@@ -17,6 +17,7 @@ export async function getProducts(ids?: number[]): Promise<Product[]> {
     }
   } catch (error) {
     console.log(error);
+    
   }
   return [];
 }

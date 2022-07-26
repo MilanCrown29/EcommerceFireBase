@@ -19,6 +19,7 @@ const [cartDisabled,setCartDiabled]=useState(false)
         customerId: customer,
         customerEphemeralKeySecret: ephermalKey,
         paymentIntentClientSecret: paymentIntent,
+        
       });
       if (error) {
         Alert.alert('Stripe Error');

@@ -65,6 +65,7 @@ export default function LoginScreen() {
             <Text style={styles.text} onPress={() => setCreate(true)}>
               Create an Account?
             </Text>
+            
           </>
         )}
       </View>
